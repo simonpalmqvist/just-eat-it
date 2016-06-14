@@ -6,6 +6,7 @@ const concat = require('gulp-concat')
 const flatten = require('gulp-flatten')
 const standard = require('gulp-standard')
 const browserSync = require('browser-sync').create()
+const historyApiFallback = require('connect-history-api-fallback')
 const browserify = require('browserify')
 const stringify = require('stringify')
 const babelify = require('babelify')
@@ -17,7 +18,12 @@ const components = [
 ]
 
 gulp.task('default', ['html', 'styles', 'scripts', 'components', 'component-styles'], function () {
-  browserSync.init({server: "./dist"})
+  browserSync.init({
+    server: {
+      baseDir: './dist',
+      middleware: [ historyApiFallback() ]
+    }
+  })
 
   gulp.watch('./src/index.html', ['html']).on('change', browserSync.reload)
   gulp.watch('./src/scripts/**/*.js', ['standard', 'scripts'])
