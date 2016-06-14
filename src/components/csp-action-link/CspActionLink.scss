@@ -1,0 +1,74 @@
+
+[is="csp-action-link"] {
+  display: block;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background-color: transparent;
+  border: none;
+
+  #button-top {
+    position: absolute;
+    top: 0%;
+    left: 8%;
+    width: 84%;
+    height: 84%;
+    border-radius: 50%;
+    background-color: rgb(208, 50, 8);
+  }
+
+  #button-body {
+    position: absolute;
+    top: 8%;
+    left: 8%;
+    width: 84%;
+    height: 84%;
+    border-radius: 50%;
+    background-color: rgb(154, 38, 7);
+  }
+
+  #button-bottom {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    background-color: rgb(180, 180, 180);
+  }
+
+  #button-bottom-2 {
+    position: absolute;
+    top: 8%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    background-color: rgb(75, 75, 75);
+  }
+
+  &:hover {
+    #button-top {
+      animation: csp-action-link-bounce 0.4s;
+      animation-fill-mode: forwards;
+    }
+  }
+
+  &.animate {
+    #button-top {
+      animation: csp-action-link-click 0.4s;
+      animation-fill-mode: forwards;
+    }
+  }
+}
+
+@keyframes csp-action-link-bounce {
+  0% {background-color: rgb(208, 50, 8);}
+  50% {transform: translateY(1%);}
+  100% {transform: translateY(0); background-color: darken(rgb(208, 50, 8), 2%);}
+}
+
+@keyframes csp-action-link-click {
+  95% {transform: translateY(10%);}
+  100% {transform: translateY(9%);}
+}

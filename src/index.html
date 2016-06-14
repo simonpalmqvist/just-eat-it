@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Just Eat It</title>
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <script type="text/javascript">
+    /**
+      * Conditionally loads webcomponents polyfill if needed.
+      * Credit: Glen Maddern (geelen on GitHub)
+    */
+
+    var webComponentsSupported = ('registerElement' in document);
+
+    if (!webComponentsSupported) {
+      var wcPoly = document.createElement('script')
+      wcPoly.src = 'https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.22/CustomElements.min.js';
+      wcPoly.onload = lazyLoadElements;
+      document.head.appendChild(wcPoly);
+    } else {
+      lazyLoadElements();
+    }
+
+    function lazyLoad(src) {
+      var e = document.createElement('script');
+      e.async = true;
+      e.src = src;
+      document.head.appendChild(e);
+    }
+
+    function lazyLoadElements () {
+      var components = [
+        'components/CspActionLink.js'
+      ];
+
+      components.forEach(lazyLoad);
+    }
+  </script>
+</head>
+<body>
+  <div class="content">
+    <div class="content-center">
+      <h1>Just Eat It</h1>
+      <a is="csp-action-link" href="https://www.google.com"></a>
+    </div>
+  </div>
+  <script defer src="scripts/bundle.js" charset="utf-8"></script>
+</body>
+</html>
