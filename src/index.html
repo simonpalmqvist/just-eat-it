@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Just Eat It</title>
-  <link rel="stylesheet" href="styles/components.css">
-  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="/styles/components.css">
+  <link rel="stylesheet" href="/styles/main.css">
   <script type="text/javascript">
     /**
       * Conditionally loads webcomponents polyfill if needed.
@@ -25,13 +25,16 @@
     function lazyLoad(src) {
       var e = document.createElement('script');
       e.async = true;
+      e.defer = true;
       e.src = src;
       document.head.appendChild(e);
     }
 
     function lazyLoadElements () {
       var components = [
-        'components/CspActionLink.js'
+        '/components/CspActionLink.js',
+        '/components/CspView.js',
+        '/components/CspRouter.js'
       ];
 
       components.forEach(lazyLoad);
@@ -39,12 +42,18 @@
   </script>
 </head>
 <body>
-  <div class="content">
-    <div class="content-center">
-      <h1>Just Eat It</h1>
-      <a is="csp-action-link" href="/action"></a>
+  <csp-view route="/">
+    <div class="content">
+      <div class="content-center">
+        <h1>Just Eat It</h1>
+        <a is="csp-action-link" href="/recipe"></a>
+      </div>
     </div>
-  </div>
-  <script defer src="scripts/bundle.js" charset="utf-8"></script>
+  </csp-view>
+  <csp-view route="/recipe">
+    <h1>Here is a recipe</h1>
+  </csp-view>
+  <csp-router></csp-router>
+  <script defer src="/scripts/bundle.js" charset="utf-8"></script>
 </body>
 </html>

@@ -14,7 +14,9 @@ const source = require('vinyl-source-stream')
 const buffer = require('vinyl-buffer')
 
 const components = [
-  './src/components/csp-action-link/CspActionLink.js'
+  './src/components/csp-action-link/CspActionLink.js',
+  './src/components/csp-router/CspRouter.js',
+  './src/components/csp-view/CspView.js'
 ]
 
 gulp.task('default', ['html', 'styles', 'scripts', 'components', 'component-styles'], function () {
