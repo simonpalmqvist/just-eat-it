@@ -4,6 +4,7 @@ const uglify = require('gulp-uglify')
 const autoprefixer = require('gulp-autoprefixer')
 const concat = require('gulp-concat')
 const flatten = require('gulp-flatten')
+const standard = require('gulp-standard')
 const browserSync = require('browser-sync').create()
 const browserify = require('browserify')
 const stringify = require('stringify')
@@ -20,7 +21,7 @@ gulp.task('default', ['html', 'styles', 'scripts', 'components', 'component-styl
 
   gulp.watch('./src/index.html', ['html']).on('change', browserSync.reload)
   gulp.watch('./src/scripts/**/*.js', ['standard', 'scripts'])
-  gulp.watch('./src/components/**/*', ['components'])
+  gulp.watch('./src/components/**/*', ['standard', 'components'])
   gulp.watch('./src/styles/**/*.scss', ['styles'])
   gulp.watch('./src/components/**/*.scss', ['component-styles'])
 })
@@ -41,7 +42,7 @@ gulp.task('scripts', function () {
 })
 
 gulp.task('standard', function () {
-  gulp.src('./scripts/**/*.js')
+  gulp.src('./src/**/*.js')
     .pipe(standard())
 		.pipe(standard.reporter('default', { breakOnError: true}))
 })

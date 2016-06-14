@@ -1,40 +1,38 @@
 const html = require('./CspActionLink.html')
 
-//Fix since Safaris Elements are objects and not class functions
-var WrappedHTMLAnchorElement = function () {}
-WrappedHTMLAnchorElement.prototype = Object.create(HTMLAnchorElement.prototype)
+// Fix since Safaris Elements are objects and not class functions
+const WrappedHTMLAnchorElement = function () {}
+WrappedHTMLAnchorElement.prototype =
+  Object.create(window.HTMLAnchorElement.prototype)
 
 class CspActionLink extends WrappedHTMLAnchorElement {
 
-  constructor() {
-    super()
-  }
+  static get extends () { return 'a' }
 
-  static get extends() { return "a" }
-
-  createdCallback() {
+  createdCallback () {
     this.innerHTML += html
 
-    this._buttonTop = this.querySelector("#button-top")
+    this._buttonTop = this.querySelector('#button-top')
     this._handleClick = this._handleClick.bind(this)
   }
 
-  attachedCallback() {
-    this.addEventListener("click", this._handleClick)
+  attachedCallback () {
+    this.addEventListener('click', this._handleClick)
   }
 
-  _handleClick(event) {
+  _handleClick (event) {
     event.preventDefault()
-    this.classList.add("animate")
+    this.classList.add('animate')
 
-    //Run animation before going to new url
+    // Run animation before going to new url
     const action = event => {
-      this._buttonTop.removeEventListener("animationend", action)
-      window.location = this.href;
+      this._buttonTop.removeEventListener('animationend', action)
+      window.location = this.href
+      this.classList.remove('animate')
     }
 
-    this._buttonTop.addEventListener("animationend", action)
+    this._buttonTop.addEventListener('animationend', action)
   }
 }
 
-document.registerElement("csp-action-link", CspActionLink)
+document.registerElement('csp-action-link', CspActionLink)
