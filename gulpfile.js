@@ -27,7 +27,7 @@ gulp.task('default', ['html', 'styles', 'scripts', 'components', 'component-styl
     }
   })
 
-  gulp.watch('./src/index.html', ['html']).on('change', browserSync.reload)
+  gulp.watch('./src/**/*.html', ['html']).on('change', browserSync.reload)
   gulp.watch('./src/scripts/**/*.js', ['standard', 'scripts'])
   gulp.watch('./src/components/**/*', ['standard', 'components'])
   gulp.watch('./src/styles/**/*.scss', ['styles'])
@@ -36,6 +36,10 @@ gulp.task('default', ['html', 'styles', 'scripts', 'components', 'component-styl
 
 gulp.task('html', function () {
   gulp.src('./src/index.html')
+    .pipe(gulp.dest('./dist/'))
+
+  gulp.src('./src/views/**/*.html')
+    .pipe(flatten())
     .pipe(gulp.dest('./dist/'))
 })
 
