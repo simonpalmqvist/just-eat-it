@@ -6,12 +6,12 @@ class CspRouter extends WrappedHTMLElement {
 
   createdCallback () {
     this._handleRoute = this._handleRoute.bind(this)
-    this._routes = new Map()
+    this._views = []
   }
 
   attachedCallback () {
     window.addEventListener('popstate', this._handleRoute)
-    this._initRoutes()
+    this._initViews()
     this._handleRoute()
   }
 
@@ -24,12 +24,12 @@ class CspRouter extends WrappedHTMLElement {
     this._handleRoute()
   }
 
-  _initRoutes () {
-    for (let view of document.querySelectorAll('csp-view')) {
+  _initViews () {
+    for (let view of this.querySelectorAll('csp-view')) {
       let route = view.route
-      if (!route || this._routes.has(route)) continue
+      if (!route || this._views.find(v => v.route === route)) continue
 
-      this._routes.set(new RegExp(`^${view.route}/{0,1}$`), view)
+      this._views.push(view)
     }
   }
 
@@ -37,19 +37,16 @@ class CspRouter extends WrappedHTMLElement {
     if (event) event.preventDefault()
     const location = window.location.pathname
 
-    const route = Array.from(this._routes.keys())
-      .find(r => r.test(location))
+    const newView = this._views.find(v => v.match(location))
 
-    if (!route) return
+    if (!newView) return
 
-    const newView = this._routes.get(route)
-
-    if (this._currentRoute) {
-      this._currentRoute.classList.remove('active')
+    if (this._currentView) {
+      this._currentView.classList.remove('active')
     }
 
     newView.classList.add('active')
-    this._currentRoute = newView
+    this._currentView = newView
   }
 }
 

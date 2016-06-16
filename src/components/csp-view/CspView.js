@@ -17,6 +17,11 @@ class CspView extends WrappedHTMLElement {
     return this.getAttribute('route')
   }
 
+  match (location) {
+    const regexp = new RegExp(`^${this.route}/{0,1}$`)
+    return regexp.test(location)
+  }
+
 }
 
 document.registerElement('csp-view', CspView)

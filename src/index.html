@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>Just Eat It</title>
   <link rel="stylesheet" href="/styles/components.css">
   <link rel="stylesheet" href="/styles/main.css">
@@ -11,49 +12,51 @@
       * Credit: Glen Maddern (geelen on GitHub)
     */
 
-    var webComponentsSupported = ('registerElement' in document);
+    var webComponentsSupported = ('registerElement' in document)
 
     if (!webComponentsSupported) {
       var wcPoly = document.createElement('script')
-      wcPoly.src = 'https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.22/CustomElements.min.js';
-      wcPoly.onload = lazyLoadElements;
-      document.head.appendChild(wcPoly);
+      wcPoly.src = 'https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.22/CustomElements.min.js'
+      wcPoly.onload = lazyLoadElements
+      document.head.appendChild(wcPoly)
     } else {
-      lazyLoadElements();
+      lazyLoadElements ()
     }
 
-    function lazyLoad(src) {
-      var e = document.createElement('script');
-      e.async = true;
-      e.defer = true;
-      e.src = src;
-      document.head.appendChild(e);
+    function lazyLoad (src) {
+      var e = document.createElement('script')
+      e.async = true
+      e.defer = true
+      e.src = src
+      document.head.appendChild(e)
     }
 
     function lazyLoadElements () {
       var components = [
+
         '/components/CspActionLink.js',
         '/components/CspView.js',
-        '/components/CspRouter.js'
-      ];
+        '/components/CspRouter.js',
+      ]
 
-      components.forEach(lazyLoad);
+      components.forEach(lazyLoad)
     }
   </script>
 </head>
 <body>
-  <csp-view route="/">
-    <div class="content">
-      <div class="content-center">
-        <h1>Just Eat It</h1>
-        <a is="csp-action-link" href="/recipe"></a>
+  <csp-router>
+    <csp-view route="/">
+      <div class="content">
+        <div class="content-center">
+          <h1>Just Eat It</h1>
+          <a is="csp-action-link" href="/recipe"></a>
+        </div>
       </div>
-    </div>
-  </csp-view>
-  <csp-view route="/recipe">
-    <h1>Here is a recipe</h1>
-  </csp-view>
-  <csp-router></csp-router>
+    </csp-view>
+    <csp-view route="/recipe">
+      <h1>Here is a recipe</h1>
+    </csp-view>
+  </csp-router>
   <script defer src="/scripts/bundle.js" charset="utf-8"></script>
 </body>
 </html>
