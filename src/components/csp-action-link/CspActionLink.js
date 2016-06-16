@@ -27,12 +27,14 @@ class CspActionLink extends WrappedHTMLAnchorElement {
   _handleClick (event) {
     event.preventDefault()
     this.classList.add('animate')
+    this._buttonTop.style.willChange = 'transform'
 
     // Run animation before going to new url
     const action = event => {
       this._buttonTop.removeEventListener('animationend', action)
       document.querySelector('csp-router').go(this.href)
       this.classList.remove('animate')
+      this._buttonTop.style.willChange = 'auto'
     }
 
     this._buttonTop.addEventListener('animationend', action)
