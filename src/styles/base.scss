@@ -1,7 +1,7 @@
 html, body {
 	margin: 0;
 	padding: 0;
-	font-family: Arial;
+	font-family: Helvetica, Arial, sans-serif;
 	background-color: rgb(215, 215, 215);
   color: rgb(75, 75, 75);
 }
@@ -18,8 +18,9 @@ html, body {
 
 h1 {
   text-align: center;
+  text-transform: uppercase;
+  color: rgba(100,100,100,0.8);
+  text-shadow: 1px 1px 3px rgb(215,215,215), 0 0 0 rgb(0,0,0), 1px 1px 3px rgb(215,215,215);
+  font-weight: 900;
   padding-bottom: 20px;
-}
-
-[is="csp-action-link"] {
 }
