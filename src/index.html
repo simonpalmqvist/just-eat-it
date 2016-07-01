@@ -42,13 +42,15 @@
       var components = [
         '/components/CspView.js',
         '/components/CspRouter.js',
-        '/components/CspActionLink.js'
+        '/components/CspActionLink.js',
+        '/components/CspHeader.js'
       ]
       components.forEach(lazyLoad)
     }
   </script>
 </head>
 <body>
+  <csp-header></csp-header>
   <csp-router>
     <csp-view route="/">
       <div class="content">

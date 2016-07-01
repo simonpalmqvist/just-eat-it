@@ -6,9 +6,12 @@ csp-view {
   bottom: 0;
   opacity: 0;
   pointer-events: none;
+  padding-top: 68px;
+  overflow: hidden;
 
   &.active {
     opacity: 1;
     pointer-events: auto;
+    overflow-y: scroll;
   }
 }

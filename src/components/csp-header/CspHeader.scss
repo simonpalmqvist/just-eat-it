@@ -1,0 +1,13 @@
+csp-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 64px;
+  background-color: rgb(208, 50, 8);
+  z-index: 1000;
+  transition: transform 0.4s;
+
+  &.hide {
+    transform: translateY(-64px);
+  }
+}
