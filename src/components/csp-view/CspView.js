@@ -16,14 +16,8 @@ function _ajax (url) {
 
 class CspView extends WrappedHTMLElement {
 
-  createdCallback () {
-  }
-
   attachedCallback () {
     if (this._lazyLoad) this._loadContent()
-  }
-
-  detachedCallback () {
   }
 
   get _lazyLoad () {
@@ -34,10 +28,11 @@ class CspView extends WrappedHTMLElement {
     return this.getAttribute('route')
   }
 
+  // TODO: Replace with fetch, maybe load on
   _loadContent () {
     _ajax(this._lazyLoad)
       .then(response => { this.innerHTML = response })
-      // .catch(err => console.warn(`Could not load view content: ${err}`))
+      .catch(err => console.warn(`Could not load view content: ${err}`))
   }
 
   match (location) {

@@ -15,6 +15,7 @@
     height: 84%;
     border-radius: 50%;
     background-color: rgb(208, 50, 8);
+    transition: transform 0.1s;
   }
 
   #button-body {
@@ -49,13 +50,7 @@
 
   &:hover {
     #button-top {
-      animation: csp-action-link-bounce 0.4s;
-      animation-fill-mode: forwards;
+      transform: translateY(1%);
     }
   }
-}
-
-@keyframes csp-action-link-bounce {
-  50% {transform: translateY(1%);}
-  100% {transform: translateY(0);}
 }

@@ -25,12 +25,12 @@ class CspRouter extends WrappedHTMLElement {
   }
 
   _initViews () {
-    for (let view of this.querySelectorAll('csp-view')) {
+    Array.from(this.querySelectorAll('csp-view')).forEach(view => {
       let route = view.route
-      if (!route || this._views.find(v => v.route === route)) continue
-
-      this._views.push(view)
-    }
+      if (route && !this._views.find(v => v.route === route)) {
+        this._views.push(view)
+      }
+    })
   }
 
   _handleRoute (event) {

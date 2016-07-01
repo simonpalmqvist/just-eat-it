@@ -13,6 +13,7 @@
     */
 
     var webComponentsSupported = ('registerElement' in document)
+    var webAnimationsSupported = document.createElement('div').animate
 
     if (!webComponentsSupported) {
       var wcPoly = document.createElement('script')
@@ -20,7 +21,14 @@
       wcPoly.onload = lazyLoadElements
       document.head.appendChild(wcPoly)
     } else {
-      lazyLoadElements ()
+      lazyLoadElements()
+    }
+
+    if (!webAnimationsSupported) {
+      var wcPoly = document.createElement('script')
+      wcPoly.src = 'https://cdn.jsdelivr.net/web-animations/2.2.1/web-animations-next.min.js'
+      wcPoly.defer = true
+      document.head.appendChild(wcPoly)
     }
 
     function lazyLoad (src) {
@@ -32,12 +40,10 @@
 
     function lazyLoadElements () {
       var components = [
-
-        '/components/CspActionLink.js',
         '/components/CspView.js',
         '/components/CspRouter.js',
+        '/components/CspActionLink.js'
       ]
-
       components.forEach(lazyLoad)
     }
   </script>
@@ -52,9 +58,7 @@
         </div>
       </div>
     </csp-view>
-    <csp-view route="/recipe" lazy-load="/recipe.html">
-
-    </csp-view>
+    <csp-view route="/recipe" lazy-load="/recipe.html"></csp-view>
   </csp-router>
   <script defer src="/scripts/bundle.js" charset="utf-8"></script>
 </body>

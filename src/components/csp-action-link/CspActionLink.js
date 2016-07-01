@@ -1,4 +1,4 @@
-const html = require('./CspActionLink.html')
+import html from './CspActionLink.html'
 
 // Fix since Safaris Elements are objects and not class functions
 const WrappedHTMLAnchorElement = function () {}
@@ -29,19 +29,18 @@ class CspActionLink extends WrappedHTMLAnchorElement {
 
     const buttonSize = this._buttonTop.getBoundingClientRect().width
     const maxWindowSize = Math.max(window.innerHeight, window.innerWidth)
-    const scale = (maxWindowSize / buttonSize) * 1.4
+    const scale = ((maxWindowSize / buttonSize) * 1.4).toFixed(1)
 
     this._buttonTop.style.willChange = 'transform'
 
-    const player = this._buttonTop.animate([
-      { transform: 'translateY(0%)', offset: 0 },
+    const keyFrames = [
+      { transform: 'translateY(1%)', offset: 0 },
       { transform: 'translateY(10%)', offset: 0.35 },
       { transform: 'translateY(9%)', offset: 0.40 },
-      { transform: `scale(${scale}, ${scale})`, offset: 1 }
-    ], {
-      duration: 700,
-      easing: 'ease-in-out'
-    })
+      { transform: `scale(${scale},${scale})`, offset: 1 }
+    ]
+
+    const player = this._buttonTop.animate(keyFrames, { duration: 700 })
 
     player.onfinish = () => {
       this._buttonTop.style.willChange = 'auto'
