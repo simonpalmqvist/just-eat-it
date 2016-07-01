@@ -4,6 +4,10 @@ WrappedHTMLElement.prototype = Object.create(window.HTMLElement.prototype)
 
 class CspHeader extends WrappedHTMLElement {
 
+  get _effectStart () {
+    return Number(this.getAttribute('effect-start'))
+  }
+
   createdCallback () {
     this._scrolling = false
     this._lastScrollTop = 0
@@ -15,14 +19,14 @@ class CspHeader extends WrappedHTMLElement {
 
   attachedCallback () {
     this._views = Array.from(document.querySelectorAll('csp-view'))
-    this._height = this.offsetHeight
+    this._height = this._effectStart || this.offsetHeight
 
     // Add listeners for all views
     this._views.forEach(this._setupScrollListener)
   }
 
   detachedCallback () {
-    this._views.forEach(this._setupScrollListener)
+    this._views.forEach(this._removeScrollListener)
   }
 
   _setupScrollListener (view) {

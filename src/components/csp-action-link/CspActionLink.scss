@@ -1,11 +1,12 @@
 
 [is="csp-action-link"] {
-  display: block;
   position: relative;
+  display: block;
   width: 200px;
   height: 200px;
   background-color: transparent;
   border: none;
+  margin: 0 auto;
 
   #button-top {
     position: absolute;
