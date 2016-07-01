@@ -10,7 +10,7 @@ class CspHeader extends WrappedHTMLElement {
     this._setupScrollListener = this._setupScrollListener.bind(this)
     this._removeScrollListener = this._removeScrollListener.bind(this)
     this._scroll = this._scroll.bind(this)
-    this._toggle = this._toggle.bind(this)
+    this._toggleVisible = this._toggleVisible.bind(this)
   }
 
   attachedCallback () {
@@ -48,7 +48,9 @@ class CspHeader extends WrappedHTMLElement {
     if (scrollTop > this._lastScrollTop && scrollTop > this._height) {
       this.classList.add('hide')
     } else {
-      this.classList.remove('hide')
+      if (scrollTop + window.innerHeight < view.scrollHeight) {
+        this.classList.remove('hide')
+      }
     }
 
     // Set last scroll position and remove wait flag

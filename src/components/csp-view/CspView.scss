@@ -13,5 +13,6 @@ csp-view {
     opacity: 1;
     pointer-events: auto;
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
   }
 }
