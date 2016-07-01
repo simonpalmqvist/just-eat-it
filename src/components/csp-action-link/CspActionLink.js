@@ -26,19 +26,29 @@ class CspActionLink extends WrappedHTMLAnchorElement {
 
   _handleClick (event) {
     event.preventDefault()
-    this.classList.add('animate')
+
+    const buttonSize = this._buttonTop.getBoundingClientRect().width
+    const maxWindowSize = Math.max(window.innerHeight, window.innerWidth)
+    const scale = (maxWindowSize / buttonSize) * 1.4
+
     this._buttonTop.style.willChange = 'transform'
 
-    // Run animation before going to new url
-    const action = event => {
-      this._buttonTop.removeEventListener('animationend', action)
-      document.querySelector('csp-router').go(this.href)
-      this.classList.remove('animate')
-      this._buttonTop.style.willChange = 'auto'
-    }
+    const player = this._buttonTop.animate([
+      { transform: 'translateY(0%)', offset: 0 },
+      { transform: 'translateY(10%)', offset: 0.35 },
+      { transform: 'translateY(9%)', offset: 0.40 },
+      { transform: `scale(${scale}, ${scale})`, offset: 1 }
+    ], {
+      duration: 700,
+      easing: 'ease-in-out'
+    })
 
-    this._buttonTop.addEventListener('animationend', action)
+    player.onfinish = () => {
+      this._buttonTop.style.willChange = 'auto'
+      document.querySelector('csp-router').go(this.href)
+    }
   }
+
 }
 
 document.registerElement('csp-action-link', CspActionLink)
