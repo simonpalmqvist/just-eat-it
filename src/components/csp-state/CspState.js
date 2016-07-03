@@ -10,10 +10,34 @@ class CspState extends WrappedHTMLElement {
   /* TODO:
       * Handle arrays (add keys for tracking status)
       * deep copy stored value
-      * add get function to get value for path
   */
 
-  updateState (path, newValue) {
+  createdCallback () {
+    if (!this.store) return
+
+    const _storedState = JSON.parse(window.localStorage.getItem(this.storeName))
+
+    // Clear localStorage if new store should be used
+    if (!_storedState) window.localStorage.clear()
+
+    _state = _storedState || _state
+  }
+
+  get storeName () {
+    return this.getAttribute('store-name') || 'state-storage'
+  }
+
+  get store () {
+    return this.getAttribute('store') !== undefined && window.localStorage
+  }
+
+  getValue (path) {
+    return path
+      .split('.')
+      .reduce((cursor, field) => typeof cursor === 'object' ? cursor[field] : undefined, _state)
+  }
+
+  updateValue (path, newValue) {
     // Copy state
     let newState = Object.assign({}, _state)
     let oldValue
@@ -45,6 +69,10 @@ class CspState extends WrappedHTMLElement {
     */
     _state = newState
     this._fireChangeEvent({path, oldValue, newValue})
+
+    if (!this.store) return
+
+    window.localStorage.setItem(this.storeName, JSON.stringify(newState))
   }
 
   _cloneValue (value) {

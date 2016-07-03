@@ -6,5 +6,5 @@ const input = document.querySelector('#test-data-binding')
 const state = document.querySelector('csp-state')
 
 input.addEventListener('keyup', () => {
-  state.updateState('purchase.amount', input.value)
+  state.updateValue('purchase.amount', input.value)
 })

@@ -7,7 +7,10 @@ class CspStateValue extends WrappedHTMLElement {
   createdCallback () {
     if (!this.path) return
 
+    const state = document.querySelector('csp-state')
+
     this._updateValue = this._updateValue.bind(this)
+    this.textContent = state.getValue(this.path)
   }
 
   attachedCallback () {

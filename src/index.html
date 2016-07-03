@@ -64,12 +64,13 @@
           </p>
           <input type="text" id="test-data-binding"/>
           <csp-state-value path="purchase.amount"></csp-state-value>
+          <csp-state-value path="name">Bertil</csp-state-value>
         </div>
       </div>
     </csp-view>
     <csp-view route="/recipe" lazy-load="/recipe.html"></csp-view>
   </csp-router>
-  <csp-state></csp-state>
+  <csp-state store store-name="just-eat-it-v1"></csp-state>
   <script defer src="/scripts/bundle.js" charset="utf-8"></script>
 </body>
 </html>
