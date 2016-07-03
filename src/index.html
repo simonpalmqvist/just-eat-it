@@ -43,7 +43,8 @@
         '/components/CspView.js',
         '/components/CspRouter.js',
         '/components/CspActionLink.js',
-        '/components/CspHeader.js'
+        '/components/CspHeader.js',
+        '/components/CspState.js'
       ]
       components.forEach(lazyLoad)
     }
@@ -57,14 +58,15 @@
         <div class="content-center">
           <h1 class="inset-text-shadow">Just Eat It</h1>
           <a is="csp-action-link" href="/recipe"></a>
-          <span class="info-text inset-text-shadow">
+          <p class="info-text inset-text-shadow">
             Press the button and get todays recipe
-          </span>
+          </p>
         </div>
       </div>
     </csp-view>
     <csp-view route="/recipe" lazy-load="/recipe.html"></csp-view>
   </csp-router>
+  <csp-state></csp-state>
   <script defer src="/scripts/bundle.js" charset="utf-8"></script>
 </body>
 </html>
