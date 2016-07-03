@@ -7,6 +7,12 @@ let _state = {}
 
 class CspState extends WrappedHTMLElement {
 
+  /* TODO:
+      * Handle arrays (add keys for tracking status)
+      * deep copy stored value
+      * add get function to get value for path
+  */
+
   updateState (path, newValue) {
     // Copy state
     let newState = Object.assign({}, _state)
@@ -28,6 +34,7 @@ class CspState extends WrappedHTMLElement {
 
     if (oldValue === newValue) return
 
+    /*
     console.log(
       'Old state', _state, '\n',
       'New state', newState, '\n',
@@ -35,6 +42,7 @@ class CspState extends WrappedHTMLElement {
       'New value', newValue, '\n',
       'Path', path)
 
+    */
     _state = newState
     this._fireChangeEvent({path, oldValue, newValue})
   }

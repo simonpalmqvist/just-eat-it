@@ -44,7 +44,8 @@
         '/components/CspRouter.js',
         '/components/CspActionLink.js',
         '/components/CspHeader.js',
-        '/components/CspState.js'
+        '/components/CspState.js',
+        '/components/CspStateValue.js'
       ]
       components.forEach(lazyLoad)
     }
@@ -61,6 +62,8 @@
           <p class="info-text inset-text-shadow">
             Press the button and get todays recipe
           </p>
+          <input type="text" id="test-data-binding"/>
+          <csp-state-value path="purchase.amount"></csp-state-value>
         </div>
       </div>
     </csp-view>
